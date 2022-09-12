@@ -12,7 +12,7 @@ import java.util.Set;
  * @version 1.0.0
  * @since 23.06.2022
  */
-public class ContainsDuplicates {
+public class ContainsDuplicate {
     /**
      * Solution 1: use set data structure since they do not allow duplicates
      * @param nums array of integer
@@ -49,7 +49,7 @@ public class ContainsDuplicates {
     }
 
     public static void main(String[] args) {
-        ContainsDuplicates cd = new ContainsDuplicates();
+        ContainsDuplicate cd = new ContainsDuplicate();
 
         int[] nums1 = {1, 2, 3, 1};
         System.out.println("Expected: true" + " --- actual:" + cd.containsDuplicate2(nums1));

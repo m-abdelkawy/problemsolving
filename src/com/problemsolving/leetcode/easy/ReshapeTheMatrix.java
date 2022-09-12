@@ -35,6 +35,23 @@ public class ReshapeTheMatrix {
         return res;
     }
 
+    public int[][] matrixReshape2(int[][] mat, int r, int c) {
+        int m = mat.length;
+        int n = mat[0].length;
+        if(m * n != r * c)
+            return mat;
+
+        int[][] res = new int[r][c];
+
+        for(int i = 0; i < r * c; i++){
+            res[i/c][i%c] = mat[i/n][i%n];
+        }
+
+        return res;
+    }
+
+
+
     public void display2DArray(int[][] mat){
         for (int i = 0; i < mat.length; i++) {
             for (int j = 0; j < mat[i].length; j++) {

@@ -9,6 +9,13 @@ package com.problemsolving.leetcode.medium;
  * @since 28.06.2022
  */
 public class SearchA2DMatrix {
+
+    /**
+     * O(m + n) solution
+     * @param matrix integer 2D matrix
+     * @param target target int we're searching the array for
+     * @return true if the array contains the target, false otherwise.
+     */
     public boolean searchMatrix(int[][] matrix, int target) {
         int rows = matrix.length;
         int cols = matrix[0].length;
@@ -39,6 +46,36 @@ public class SearchA2DMatrix {
         return false;
     }
 
+    /**
+     * O(m*n) solution
+     * @param matrix integer 2D matrix
+     * @param target target int we're searching the array for
+     * @return true if the array contains the target, false otherwise.
+     */
+    public boolean searchMatrix1(int[][] matrix, int target) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+
+        if(target < matrix[0][0] || target > matrix[m-1][n-1]){
+            return false;
+        }
+
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                if(matrix[i][j] == target){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * O(m+n) solution
+     * @param matrix integer 2D matrix
+     * @param target target int we're searching the array for
+     * @return true if the array contains the target, false otherwise.
+     */
     public boolean searchMatrix2(int[][] matrix, int target) {
         int m = matrix.length;
         int n = matrix[0].length;
@@ -51,6 +88,9 @@ public class SearchA2DMatrix {
                 i--;
             } else if (target > matrix[i][j]) {
                 j++;
+                //extra optimization
+                if(j < n && target < matrix[i][j])
+                    break;
             } else {
                 return true;
             }
@@ -58,6 +98,12 @@ public class SearchA2DMatrix {
         return false;
     }
 
+    /**
+     * O(log(m*n)) solution
+     * @param matrix integer 2D matrix
+     * @param target target int we're searching the array for
+     * @return true if the array contains the target, false otherwise.
+     */
     public boolean searchMatrixBinarySearch(int[][] matrix, int target) {
         if (matrix.length == 0)
             return false;
@@ -102,6 +148,33 @@ public class SearchA2DMatrix {
             }
             else{
                 lo = mid+1;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * O(m+n) solution
+     * @param matrix integer 2D matrix
+     * @param target target int we're searching the array for
+     * @return true if the array contains the target, false otherwise.
+     */
+    public boolean searchMatrix3(int[][] matrix, int target) {
+        int m = matrix.length;
+        int n = matrix[0].length;
+
+        if(target < matrix[0][0] || target > matrix[m-1][n-1])
+            return false;
+
+        for(int i = 0; i < m; i++){
+            if(target > matrix[i][n-1])
+                continue;
+
+            for(int j = 0; j < n; j++){
+                if(target == matrix[i][j])
+                    return true;
+                else if(target < matrix[i][j])
+                    return false;
             }
         }
         return false;

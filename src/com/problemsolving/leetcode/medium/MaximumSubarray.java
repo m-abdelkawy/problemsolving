@@ -1,4 +1,4 @@
-package com.problemsolving.leetcode.easy;
+package com.problemsolving.leetcode.medium;
 
 /**
  * 53. Maximum Subarray
@@ -43,6 +43,29 @@ public class MaximumSubarray {
             maxSum = Math.max(maxSum, currentSum);
             if (currentSum < 0) {
                 currentSum = 0;
+            }
+        }
+        return maxSum;
+    }
+
+    /**
+     * O(n) sliding window like solution
+     *
+     * @param nums array of integers
+     * @return maximum sum of sub array
+     */
+    public int maxSubArray3(int[] nums){
+        int n = nums.length;
+        int maxSum = Integer.MIN_VALUE;
+        int curSum = 0;
+        int i = 0, j = 0;
+        while (j < n){
+            curSum += nums[j];
+            maxSum = Math.max(curSum, maxSum);
+            j++;
+            if(curSum < 0){
+                curSum = 0;
+                i = j;
             }
         }
         return maxSum;

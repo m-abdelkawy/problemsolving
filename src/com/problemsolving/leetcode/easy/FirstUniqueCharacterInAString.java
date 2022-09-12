@@ -30,11 +30,8 @@ public class FirstUniqueCharacterInAString {
                 break;
             }
         }
-        if(uniqueChar == null){
-            return -1;
-        }
-//        int index = Arrays.binarySearch(chars, uniqueChar.charValue());
-        return findIndex(chars, uniqueChar.charValue());
+
+        return uniqueChar == null? -1 : findIndex(chars, uniqueChar.charValue());
     }
 
     private int findIndex(char[] a, char c){
@@ -43,6 +40,21 @@ public class FirstUniqueCharacterInAString {
             if(a[i] == c){
                 return i;
             }
+        }
+        return -1;
+    }
+
+    public int firstUniqChar1(String s) {
+        int n = s.length();
+        char[] chars = s.toCharArray();
+        Map<Character, Integer> frequencyMap = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            frequencyMap.put(chars[i], frequencyMap.getOrDefault(chars[i], 0) + 1);
+        }
+
+        for (int i = 0; i < n; i++) {
+            if(frequencyMap.get(s.charAt(i)) == 1)
+                return i;
         }
         return -1;
     }
@@ -57,6 +69,15 @@ public class FirstUniqueCharacterInAString {
             if(letterFrequency[s.charAt(i)-'a'] == 1){
                 return i;
             }
+        }
+        return -1;
+    }
+
+    public int firstUniqChar3(String s) {
+        int n = s.length();
+        for (int i = 0; i < n; i++) {
+            if(s.indexOf(s.charAt(i)) == s.lastIndexOf(s.charAt(i)))
+                return i;
         }
         return -1;
     }

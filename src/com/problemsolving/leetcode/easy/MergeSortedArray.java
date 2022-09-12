@@ -11,6 +11,31 @@ import java.util.Arrays;
  * @since 26.06.2022
  */
 public class MergeSortedArray {
+    public void merge1(int[] nums1, int m, int[] nums2, int n) {
+        if(n == 0) return;
+        int[] res = new int[m+n];
+        int i = 0, j = 0, k = 0;
+        while(k < m+n){
+            if(nums1[i] <= nums2[j] && i < m){
+                res[k++] = nums1[i++];
+                if(i == m){
+                    while(j < n){
+                        res[k++] = nums2[j++];
+                    }
+                }
+            }else{
+                res[k++] = nums2[j++];
+                if(j == n){
+                    while(i < m){
+                        res[k++] = nums1[i++];
+                    }
+                }
+            }
+        }
+        for(int l = 0; l < m+n; l++){
+            nums1[l] = res[l];
+        }
+    }
     public void merge(int[] nums1, int m, int[] nums2, int n) {
         int len = m + n;
         int[] aux = new int[m+n];

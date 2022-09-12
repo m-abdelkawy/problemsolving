@@ -15,39 +15,38 @@ public class RansomNote {
         char[] chars1 = ransomNote.toCharArray();
         char[] chars2 = magazine.toCharArray();
 
+        int len1 = chars1.length;
+        int len2 = chars2.length;
+
         Arrays.sort(chars1);
         Arrays.sort(chars2);
 
-        int n1 = chars1.length;
-        int n2 = chars2.length;
-
-        int i =0, j = 0;
-        int count=0;
-        while(i < n1 && j < n2){
-            if(chars1[i]>chars2[j]){
-                j++;
-            }
-            else if(chars1[i] == chars2[j]){
+        int count = 0;
+        int i = 0, j = 0;
+        while (i < len1 && j < len2) {
+            if (chars1[i] == chars2[j]) {
                 count++;
                 i++;
                 j++;
-            }else{
+            } else if (chars1[i] > chars2[j]) {
+                j++;
+            } else {
                 break;
             }
         }
-        return count == n1;
+        return count == len1;
     }
 
     public boolean canConstruct2(String ransomNote, String magazine) {
         int[] count = new int[26];
-        int n1 = ransomNote.length();
-        int n2 = magazine.length();
-        for (int i = 0; i < n2; i++) {
-            count[magazine.charAt(i) - 'a'] +=1;
+        int len1 = ransomNote.length();
+        int len2 = magazine.length();
+        for (int i = 0; i < len2; i++) {
+            count[magazine.charAt(i) - 'a'] += 1;
         }
-        for (int i = 0; i    < n1; i++) {
-            count[ransomNote.charAt(i)-'a']-=1;
-            if(count[ransomNote.charAt(i)-'a']<0){
+        for (int i = 0; i < len1; i++) {
+            count[ransomNote.charAt(i) - 'a'] -= 1;
+            if (count[ransomNote.charAt(i) - 'a'] < 0) {
                 return false;
             }
         }

@@ -1,8 +1,7 @@
 package com.problemsolving.leetcode.hard;
 
 import java.security.PublicKey;
-import java.util.Arrays;
-import java.util.Stack;
+import java.util.*;
 
 public class BasicCalculator {
     public int calculate(String s) {
@@ -36,7 +35,18 @@ public class BasicCalculator {
     }
 
     public static void main(String[] args) {
-        BasicCalculator calc = new BasicCalculator();
-        System.out.println(calc.calculate("1 + 1")); //2
+//        BasicCalculator calc = new BasicCalculator();
+//        System.out.println(calc.calculate("1 + 1")); //2
+
+        List<Integer> lst = new ArrayList<>();
+        lst.add(1);
+        lst.add(1);
+        lst.add(2);
+        lst.add(2);
+        List<Integer> lstNoduplicates = new ArrayList<>(new HashSet<>(lst));
+
+        for (int i = 0; i < lstNoduplicates.size(); i++) {
+            System.out.println(lstNoduplicates.get(i));
+        }
     }
 }
