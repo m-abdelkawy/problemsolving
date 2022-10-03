@@ -47,10 +47,32 @@ public class SortColors {
         }
     }
 
+    public void sortColors2(int[] nums) {
+        int n = nums.length;
+        int p0 = 0, current = 0, p2 = n-1;
+
+        while(current <= p2){
+            if(nums[current] == 0){
+                swap(nums, p0++, current++);
+            }else if(nums[current] == 2){
+                swap(nums, p2--, current);
+            }else{
+                current++;
+            }
+        }
+    }
+
+    private void swap(int[] a, int i, int j){
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }
+
     public static void main(String[] args) {
-        int[] a = {2, 0, 2, 1, 1, 0};
+        //int[] a = {2, 0, 2, 1, 1, 0};
+        int[] a = {2, 0, 1};
         SortColors s = new SortColors();
-        s.sortColors(a);
+        s.sortColors2(a);
         System.out.println(Arrays.toString(a));
     }
 }

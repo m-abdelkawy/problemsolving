@@ -50,6 +50,12 @@ public class ThreeSum {
         return triplets;
     }
 
+    public List<List<Integer>> threeSum2(int[] nums) {
+        List<List<Integer>> triplets = new ArrayList<>();
+
+        return triplets;
+    }
+
     public static void main(String[] args) {
         int[] nums = {-4, -2, -2, -2, 0, 1, 2, 2, 2, 3, 3, 4, 4, 6, 6};
         //int[] nums = {-1,0,1,2,-1,-4};
