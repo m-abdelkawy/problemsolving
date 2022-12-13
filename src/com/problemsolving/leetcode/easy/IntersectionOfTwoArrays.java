@@ -15,7 +15,7 @@ import java.util.stream.Stream;
  */
 public class IntersectionOfTwoArrays {
     /**
-     * O(nlogn) solution
+     * O(nlogn + mlogm) solution
      * @param nums1 1st Array
      * @param nums2 2nd array
      * @return intersection of the 2 arrays
@@ -39,7 +39,7 @@ public class IntersectionOfTwoArrays {
     }
 
     /**
-     * O(nlogn) solution
+     * O(nlogn + mlogm) solution
      * @param nums1 1st Array
      * @param nums2 2nd array
      * @return intersection of the 2 arrays
@@ -67,12 +67,38 @@ public class IntersectionOfTwoArrays {
     }
 
     /**
-     * O(n+m) solution
+     * Time Complexity: O(nlogn + mlogm)
+     * Space Complexity: from O(nlogn + mlogm) to O(n + m) depending on the sorting alg.
      * @param nums1 1st Array
      * @param nums2 2nd array
      * @return intersection of the 2 arrays
      */
     public int[] intersect3(int[] nums1, int[] nums2) {
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+
+        int i = 0, j = 0, k = 0;
+        while(i < nums1.length && j < nums2.length){
+            if(nums1[i] < nums2[j]){
+                i++;
+            }else if(nums1[i] > nums2[j]){
+                j++;
+            }else{
+                nums1[k++] = nums1[i++];
+                j++;
+            }
+        }
+        return Arrays.copyOfRange(nums1, 0, k);
+    }
+
+    /**
+     * Time Complexity: O(n+m)
+     * Space Complexity: O(n) for the HashMap extra space
+     * @param nums1 1st Array
+     * @param nums2 2nd array
+     * @return intersection of the 2 arrays
+     */
+    public int[] intersect4(int[] nums1, int[] nums2) {
         List<Integer> lst = new ArrayList<>();
 
         Map<Integer, Integer> frequencyMap = new HashMap<>();
@@ -91,6 +117,35 @@ public class IntersectionOfTwoArrays {
             }
         }
         return listToArray(lst);
+    }
+
+    /**
+     * Time Complexity: O(n+m)
+     * Space Complexity: O(min(n, m)) for the HashMap extra space
+     * @param nums1 1st Array
+     * @param nums2 2nd array
+     * @return intersection of the 2 arrays
+     */
+    public int[] intersect5(int[] nums1, int[] nums2) {
+        if(nums1.length > nums2.length){
+            return intersect5(nums2, nums1);
+        }
+
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
+        for (Integer i: nums1) {
+            frequencyMap.put(i, frequencyMap.getOrDefault(i, 0) + 1);
+        }
+
+        int k = 0;
+        for (Integer i: nums2) {
+            int count = frequencyMap.getOrDefault(i, 0);
+            if(count > 0){
+                nums1[k++] = i;
+                frequencyMap.put(i, count - 1);
+            }
+        }
+
+        return Arrays.copyOfRange(nums1, 0, k);
     }
 
     private int[] listToArray(List<Integer> lst){

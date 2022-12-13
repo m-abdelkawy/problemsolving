@@ -54,16 +54,16 @@ public class MaximumSubarray {
      * @param nums array of integers
      * @return maximum sum of sub array
      */
-    public int maxSubArray3(int[] nums){
+    public int maxSubArray3(int[] nums) {
         int n = nums.length;
         int maxSum = Integer.MIN_VALUE;
         int curSum = 0;
         int i = 0, j = 0;
-        while (j < n){
+        while (j < n) {
             curSum += nums[j];
             maxSum = Math.max(curSum, maxSum);
             j++;
-            if(curSum < 0){
+            if (curSum < 0) {
                 curSum = 0;
                 i = j;
             }
@@ -71,10 +71,80 @@ public class MaximumSubarray {
         return maxSum;
     }
 
+    /**
+     * Dynamic programming solution
+     * Kidane's Alg: https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm
+     * <p>
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
+     *
+     * @param nums array of integers
+     * @return maximum sum of sub array
+     */
+    public int maxSubArray4(int[] nums) {
+        int currentSum = nums[0];
+        int maxSum = nums[0];
+
+        for (int i = 1; i < nums.length; i++) {
+            int num = nums[i];
+            currentSum = Math.max(num, num + currentSum);
+            maxSum = Math.max(currentSum, maxSum);
+        }
+        return maxSum;
+    }
+
+    /**
+     * Divide and Conquer solution
+     * <p>
+     * Time Complexity: O(n. logn)
+     * Space Complexity: O(logn)
+     *
+     * @param nums array of integers
+     * @return maximum sum of sub array
+     */
+    public int maxSubArray5(int[] nums) {
+        return findBestSubarray(nums, 0, nums.length - 1);
+    }
+
+    private int findBestSubarray(int[] nums, int left, int right) {
+        // base case - empty array
+        if (left > right)
+            return Integer.MIN_VALUE;
+
+        int mid = Math.floorDiv(left + right, 2);
+        int curr = 0;
+        int bestLeftSum = 0, bestRightSum = 0;
+
+        // iterate left half
+        for (int i = mid - 1; i >= left; i--) {
+            curr += nums[i];
+            bestLeftSum = Math.max(bestLeftSum, curr);
+            System.out.println("current: " + curr + ",  bestLeftSum: " + bestLeftSum);
+        }
+        System.out.println();
+
+        //iterate right half
+        curr = 0;
+        for (int i = mid + 1; i < right; i++) {
+            curr += nums[i];
+            bestRightSum = Math.max(bestRightSum, curr);
+            System.out.println("current: " + curr + ",  bestRightSum: " + bestRightSum);
+        }
+
+        int bestCombinedSum = bestLeftSum + nums[mid] + bestRightSum;
+        System.out.println();
+        System.out.println(bestLeftSum + " + " + nums[mid] + " + " + bestRightSum + " = " + bestCombinedSum);
+
+        int leftSum = findBestSubarray(nums, left, mid - 1);
+        int rightSum = findBestSubarray(nums, mid + 1, right);
+
+        return Math.max(bestCombinedSum, Math.max(leftSum, rightSum));
+    }
+
     public static void main(String[] args) {
         MaximumSubarray ms = new MaximumSubarray();
         int[] nums1 = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
-        System.out.println("Expected: 6" + " --- actual: " + ms.maxSubArray2(nums1));
+        System.out.println("Expected: 6" + " --- actual: " + ms.maxSubArray5(nums1));
         System.out.println();
 
         int[] nums2 = {1};
@@ -85,7 +155,7 @@ public class MaximumSubarray {
         System.out.println("Expected: 23" + " --- actual: " + ms.maxSubArray2(nums3));
         System.out.println();
 
-        int[] nums4 = {-2,-2,-3,0,-3,1,-3};
+        int[] nums4 = {-2, -2, -3, 0, -3, 1, -3};
         System.out.println("Expected: 1" + " --- actual: " + ms.maxSubArray2(nums4));
         System.out.println();
     }

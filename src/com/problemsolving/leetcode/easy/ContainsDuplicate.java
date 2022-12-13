@@ -38,7 +38,17 @@ public class ContainsDuplicate {
         return nums.length != set.size();
     }
 
-    public boolean containsDuplicate3(int[] nums){
+    public boolean containsDuplicate3(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        for(int i = 0; i < nums.length; i++){
+            if(!set.add(nums[i])){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean containsDuplicate4(int[] nums){
         Arrays.sort(nums);
         for (int i = 0; i < nums.length-1; i++) {
             if(nums[i] == nums[i+1]){

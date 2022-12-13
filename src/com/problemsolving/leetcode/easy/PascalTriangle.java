@@ -13,6 +13,12 @@ import java.util.List;
  * @since 26.06.2022
  */
 public class PascalTriangle {
+    /**
+     * Time Complexity: O(numRows^2)
+     * Space Complexity: O(1)
+     * @param numRows
+     * @return
+     */
     public List<List<Integer>> generate(int numRows) {
         List<List<Integer>> res = new ArrayList<>();
         List<Integer> lst = Arrays.asList(1);
