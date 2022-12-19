@@ -66,4 +66,25 @@ public class PascalTriangle {
 
         return res;
     }
+
+    public List<List<Integer>> generate3(int numRows) {
+        List<List<Integer>> res = new ArrayList<>();
+
+        List<Integer> lst = List.of(1);
+        res.add(lst);
+        List<Integer> previous = null;
+
+        for(int i = 1; i < numRows; i++){
+            previous = res.get(i - 1);
+            lst = new ArrayList<>();
+            for(int j = 0; j < i+1; j++){
+                int left = j == 0? 0 : previous.get(j-1);
+                int right = j == i? 0 : previous.get(j);
+                lst.add(left + right);
+            }
+            res.add(lst);
+        }
+
+        return res;
+    }
 }
