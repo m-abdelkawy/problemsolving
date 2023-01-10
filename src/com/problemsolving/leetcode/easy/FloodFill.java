@@ -7,9 +7,17 @@ public class FloodFill {
     static Map<String, List<String>> graph;
     boolean[][] visited;
 
-    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+    public int[][] floodFill1(int[][] image, int sr, int sc, int color) {
         formGraph(image);
         dfs(image, sr, sc, color);
+        return image;
+    }
+
+    public int[][] floodFill2(int[][] image, int sr, int sc, int color) {
+        int srcColor = image[sr][sc];
+        if(srcColor != color){
+            dfs(image, sr, sc, srcColor, color);
+        }
         return image;
     }
 
@@ -37,7 +45,7 @@ public class FloodFill {
                 split = lstAdjacent.get(i).split("-");
                 x = Integer.parseInt(split[0]);
                 y = Integer.parseInt(split[1]);
-                if(image[x][y] == srcColor && !visited[x][y]){
+                if (image[x][y] == srcColor && !visited[x][y]) {
                     stack.push(x + "-" + y);
                     image[x][y] = color;
                 }
@@ -84,6 +92,17 @@ public class FloodFill {
             List<String> adjacents = new ArrayList<>();
             adjacents.add(dest);
             graph.put(src, adjacents);
+        }
+    }
+
+    /*--------------------------------------------------*/
+    private void dfs(int[][] image, int r, int c, int srcColor, int color) {
+        if (image[r][c] == srcColor) {
+            image[r][c] = color;
+            if (r >= 1) dfs(image, r - 1, c, srcColor, color);
+            if (c >= 1) dfs(image, r, c - 1, srcColor, color);
+            if (r < image.length - 1) dfs(image, r + 1, c, srcColor, color);
+            if (c < image[0].length - 1) dfs(image, r, c + 1, srcColor, color);
         }
     }
 
