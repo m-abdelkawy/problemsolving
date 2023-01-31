@@ -1,8 +1,6 @@
 package com.problemsolving.leetcode.medium;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -16,7 +14,7 @@ import java.util.stream.Collectors;
  * @version 1.0.0 - 31.05.2022
  */
 public class ThreeSum {
-    public List<List<Integer>> threeSum(int[] nums) {
+    public List<List<Integer>> threeSum1(int[] nums) {
         List<List<Integer>> triplets = new ArrayList<>();
         Arrays.sort(nums);
         int N = nums.length;
@@ -50,17 +48,43 @@ public class ThreeSum {
         return triplets;
     }
 
+    /**
+     * Hashset approach
+     *
+     * @param nums
+     * @return
+     */
     public List<List<Integer>> threeSum2(int[] nums) {
+        Arrays.sort(nums);
         List<List<Integer>> triplets = new ArrayList<>();
-
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            if (i == 0 || nums[i - 1] != nums[i]) {
+                twoSumHashSet(nums, i, triplets);
+            }
+        }
         return triplets;
+    }
+
+    private void twoSumHashSet(int[] nums, int firstIndex, List<List<Integer>> lst) {
+        Set<Integer> seen = new HashSet<>();
+        for (int i = firstIndex + 1; i < nums.length; i++) {
+            int complement = -nums[firstIndex] - nums[i];
+            if(seen.contains(complement)){
+                lst.add(List.of(nums[firstIndex], nums[i], complement));
+                while (i + 1 < nums.length && nums[i+1] == nums[i]){
+                    i++;
+                }
+            }
+            seen.add(nums[i]);
+        }
     }
 
     public static void main(String[] args) {
         int[] nums = {-4, -2, -2, -2, 0, 1, 2, 2, 2, 3, 3, 4, 4, 6, 6};
         //int[] nums = {-1,0,1,2,-1,-4};
         ThreeSum threeSum = new ThreeSum();
-        List<List<Integer>> triplets = threeSum.threeSum(nums);
+        List<List<Integer>> triplets = threeSum.threeSum1(nums);
         for (List<Integer> triplet : triplets) {
             String tripletAsString = triplet.stream()
                     .map(String::valueOf)

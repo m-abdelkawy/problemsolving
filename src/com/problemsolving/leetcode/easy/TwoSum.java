@@ -20,10 +20,11 @@ public class TwoSum {
                 if(nums[i] + nums[j] == target){
                     res[0] = i;
                     res[1] = j;
+                    return res;
                 }
             }
         }
-        return res;
+        return null;
     }
 
     /**

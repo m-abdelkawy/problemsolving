@@ -2,6 +2,7 @@ package com.problemsolving.leetcode.medium;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * 200. Number of Islands
@@ -118,6 +119,70 @@ public class NumberOfIslands {
             }
         }
 
+        return count;
+    }
+
+    /*-------------------------------------BFS-------------------------------------*/
+
+    /**
+     * Time Complexity: O(m * n)
+     * Space Complexity: O(min(m, n))
+     *
+     * @param grid array of characters
+     * @return number of islands
+     */
+    public int numIslands3(char[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+
+        if (grid == null || m == 0 || n == 0) {
+            return 0;
+        }
+
+        int count = 0;
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == '1') {
+                    count++;
+                    grid[i][j] = 'x'; //mark as seen
+
+                    Queue<String> adjacents = new LinkedList<>();
+
+                    adjacents.add(i + "#" + j);
+
+                    while (!adjacents.isEmpty()) {
+                        String[] arr = adjacents.remove().split("#");
+                        int row = Integer.parseInt(arr[0]);
+                        int col = Integer.parseInt(arr[1]);
+
+                        // check top
+                        if (row - 1 >= 0 && grid[row - 1][col] == '1') {
+                            adjacents.add((row - 1) + "#" + col);
+                            grid[row - 1][col] = 'x';
+                        }
+
+                        //check bottom
+                        if (row + 1 < m && grid[row + 1][col] == '1') {
+                            adjacents.add((row + 1) + "#" + col);
+                            grid[row + 1][col] = 'x';
+                        }
+
+                        //check left
+                        if(col - 1 >= 0 && grid[row][col - 1] == '1'){
+                            adjacents.add(row + "#" + (col-1));
+                            grid[row][col - 1] = 'x';
+                        }
+
+                        //check right
+                        if(col + 1 < n && grid[row][col + 1] == '1'){
+                            adjacents.add(row + "#" + (col+1));
+                            grid[row][col +1] = 'x';
+                        }
+                    }
+                }
+            }
+        }
         return count;
     }
 }

@@ -13,7 +13,6 @@ public class IsSubsequence {
         int len_s = s.length();
         int len_t = t.length();
 
-        boolean isSequence = true;
         int i = 0, j = 0;
 
         while (i < len_s && j < len_t) {
@@ -25,13 +24,12 @@ public class IsSubsequence {
             j++;
         }
 
-        return i == len_s ? true : false;
+        return i == len_s;
     }
 
     public boolean isSubsequence2(String s, String t) {
         int index = -1;
         int len_s = s.length();
-        int len_t = t.length();
         for (int i = 0; i < len_s; i++) {
             index = t.indexOf(s.charAt(i), index + 1);
             if (index == -1) {

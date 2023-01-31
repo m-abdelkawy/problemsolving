@@ -48,6 +48,23 @@ public class FindPivotIndex {
         return leftSum == rightSum? pivot : -1;
     }
 
+    public int pivotIndex3(int[] nums) {
+        int sum = 0;
+        for(int i = 0; i < nums.length; i++){
+            sum += nums[i];
+        }
+
+        int sumLeft = 0;
+        for(int i = 0; i < nums.length; i++){
+            if(sumLeft == (sum - nums[i])/2 && (sum - nums[i])%2 == 0){
+                return i;
+            }
+            sumLeft+=nums[i];
+        }
+
+        return -1;
+    }
+
     public static void main(String[] args) {
         //int[] nums = {1,7,3,6,5,6};
         int[] nums = {-1,-1,0,1,1,0};
