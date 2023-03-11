@@ -16,6 +16,7 @@ import java.util.Set;
 public class LongestSubstringWithoutRepeatingCharacters {
     /**
      * Brute Force Algorithm
+     * "Time Limit Exceeded"
      *
      * @param s input string
      * @return length of longest substring without repeated characters
@@ -82,25 +83,27 @@ public class LongestSubstringWithoutRepeatingCharacters {
      * @return length of longest substring without repeated characters
      */
     public int lengthOfLongestSubstring3(String s) {
-        int maxLen = 0;
         int left = 0, right = 0, n = s.length();
-        Map<Character, Integer> frequencyMap = new HashMap<>();
+        int maxLength = 0;
+
+        Map<Character, Integer> map = new HashMap<>();
 
         while (right < n) {
-            Character c = s.charAt(right);
-            int frequency = frequencyMap.getOrDefault(c, 0);
-            frequencyMap.put(c, frequency + 1);
+            char r = s.charAt(right);
+            map.put(r, map.getOrDefault(r, 0) + 1);
+            int frequency = map.get(r);
+            while (frequency > 1) {
+                char l = s.charAt(left);
+                map.put(l, map.get(l) - 1);
+                left++;
+                frequency = map.get(r);
+            }
 
-           while(frequencyMap.get(c) > 1){
-               char l = s.charAt(left);
-               frequencyMap.put(l, frequencyMap.get(l) - 1);
-               left++;
-           }
-
-            maxLen = Math.max(maxLen, right - left + 1);
             right++;
+            maxLength = Math.max(maxLength, right - left);
         }
-        return maxLen;
+
+        return maxLength;
     }
 
     /**
@@ -115,7 +118,7 @@ public class LongestSubstringWithoutRepeatingCharacters {
 
         for (int left = 0, right = 0; right < n; right++) {
             Character c = s.charAt(right);
-            if(frequencyMap.containsKey(c)){
+            if (frequencyMap.containsKey(c)) {
                 left = Math.max(left, frequencyMap.get(c) + 1);
             }
             maxLen = Math.max(maxLen, right - left + 1);
@@ -130,5 +133,7 @@ public class LongestSubstringWithoutRepeatingCharacters {
 
         LongestSubstringWithoutRepeatingCharacters ls = new LongestSubstringWithoutRepeatingCharacters();
         System.out.println(ls.lengthOfLongestSubstring2(s));
+
+        System.out.println(ls.lengthOfLongestSubstring4("abba"));
     }
 }

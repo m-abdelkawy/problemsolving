@@ -24,18 +24,16 @@ public class SingleNumber {
     }
 
     public int singleNumber2(int[] nums) {
+        int sum = 0;
+        int sumSet = 0;
         Set<Integer> set = new HashSet<>();
-        int sumNums = 0;
-        for (int i = 0; i < nums.length; i++) {
-            set.add(nums[i]);
-            sumNums += nums[i];
+        for(int num: nums){
+            sum+= num;
+            if(set.add(num)){
+                sumSet += num;
+            }
         }
-        // int sumSingle = set.stream().mapToInt(x->x).sum();
-        int sumSingle = 0;
-        for (Integer num : set) {
-            sumSingle += num;
-        }
-        return 2 * sumSingle - sumNums;
+        return 2 * sumSet - sum;
     }
 
     public int singleNumber3(int[] nums) {

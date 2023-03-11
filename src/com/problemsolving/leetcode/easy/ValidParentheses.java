@@ -1,7 +1,6 @@
 package com.problemsolving.leetcode.easy;
 
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * 20. Valid Parentheses
@@ -81,8 +80,46 @@ public class ValidParentheses {
         return stack.isEmpty();
     }
 
+    public static List<String> matchingBraces(List<String> braces) {
+        // Write your code here
+        List<String> res = new ArrayList<>();
+        Stack<Character> stack = new Stack<>();
+        for(int i = 0; i < braces.size(); i++){
+            stack.clear();
+            char[] chars = braces.get(i).toCharArray();
+
+            for(int j = 0; j < chars.length; j++){
+                if(chars[j] == '{' || chars[j] == '(' || chars[j] == '['){
+                    stack.push(chars[j]);
+                }else if(!stack.isEmpty() && ((chars[j] == '}' && stack.peek() == '{')
+                        || (chars[j] == ']' && stack.peek() == '[') || (chars[j] == ')' && stack.peek() == '('))){
+                    stack.pop();
+
+                }else{
+                    res.add("NO");
+                    break;
+                }
+            }
+
+            if(res.size() >= i+1)
+                continue;
+
+            if(stack.isEmpty()){
+                res.add("YES");
+            }else{
+                res.add("NO");
+            }
+        }
+
+        return res;
+    }
+
+
     public static void main(String[] args) {
-        String s = "{}";
-        System.out.println(isValid(s));
+        //String s = "{}";
+        //System.out.println(isValid(s));
+
+        List<String> braces = List.of("{[()]}", "{[(])}", "{{[[(())]]}}");
+        System.out.println(Arrays.toString(matchingBraces(braces).toArray()));
     }
 }

@@ -35,6 +35,27 @@ public class RemoveAllAdjacentDuplicatesInString {
     }
 
     /**
+     *
+     *
+     * @param s input string
+     * @return string with duplicate consecutive characters removed
+     */
+    public String removeDuplicates1Optimized(String s) {
+        int i = 0, j = i + 1;
+        while (j < s.length()) {
+            if (s.charAt(i) == s.charAt(j)) {
+                s = s.substring(0, i) + s.substring(j + 1);
+                i = i - 1 >= 0 ? i - 1 : 0;
+                j = i + 1;
+                continue;
+            }
+            i++;
+            j++;
+        }
+        return s;
+    }
+
+    /**
      * Time Complexity: O(n2)
      * Time limit exceeded
      *
@@ -94,12 +115,11 @@ public class RemoveAllAdjacentDuplicatesInString {
         StringBuilder sb = new StringBuilder();
         int sbLength = 0;
         char[] chars = s.toCharArray();
-        for (char c: chars) {
-            if(sbLength != 0 && c == sb.charAt(sbLength - 1)){
+        for (char c : chars) {
+            if (sbLength != 0 && c == sb.charAt(sbLength - 1)) {
                 sb.deleteCharAt(sbLength - 1);
                 sbLength--;
-            }
-            else{
+            } else {
                 sb.append(c);
                 sbLength = sb.length();
             }
@@ -109,7 +129,7 @@ public class RemoveAllAdjacentDuplicatesInString {
 
     public static void main(String[] args) {
         RemoveAllAdjacentDuplicatesInString rd = new RemoveAllAdjacentDuplicatesInString();
-        System.out.println(rd.removeDuplicates4("abbaca"));
+        System.out.println(rd.removeDuplicates1Optimized("abbaca"));
         System.out.println(rd.removeDuplicates4("azxxzy"));
     }
 }

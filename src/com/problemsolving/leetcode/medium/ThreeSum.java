@@ -83,6 +83,7 @@ public class ThreeSum {
     public static void main(String[] args) {
         int[] nums = {-4, -2, -2, -2, 0, 1, 2, 2, 2, 3, 3, 4, 4, 6, 6};
         //int[] nums = {-1,0,1,2,-1,-4};
+        // -4, -1, -1, -1, 0, 1, 2
         ThreeSum threeSum = new ThreeSum();
         List<List<Integer>> triplets = threeSum.threeSum1(nums);
         for (List<Integer> triplet : triplets) {

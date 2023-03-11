@@ -58,7 +58,8 @@ public class TwoSum {
         int second = sortedNums[j];
 
         res[0] = findIndex(nums, 0, nums.length, first);
-        res[1] = Math.max(findIndex(nums, 0, res[0], second), findIndex(nums, res[0] + 1, nums.length, second));
+        res[1] = Math.max(findIndex(nums, 0, res[0], second),
+                findIndex(nums, res[0] + 1, nums.length, second));
 
         return res;
     }
