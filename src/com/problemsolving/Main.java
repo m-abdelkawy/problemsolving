@@ -25,6 +25,13 @@ public class Main {
         return 1;
     }
     public static void main(String[] args) throws IOException, InterruptedException {
-        getNumberOfMovies("maze");
+        //getNumberOfMovies("maze");
+
+        double d = 10.0 / -0.0;
+        if(d == Double.POSITIVE_INFINITY){
+            System.out.println("Positive Infinity");
+        }else{
+            System.out.println("Negative Infinity");
+        }
     }
 }

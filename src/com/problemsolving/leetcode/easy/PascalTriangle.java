@@ -87,4 +87,24 @@ public class PascalTriangle {
 
         return res;
     }
+
+    public List<List<Integer>> generateDp(int numRows) {
+        List<List<Integer>> res = new ArrayList<>();
+
+        List<Integer> lst = List.of(1);
+        res.add(lst);
+
+        for (int rowIndex = 1; rowIndex < numRows; rowIndex++) {
+            List<Integer> row = new ArrayList<>();
+            List<Integer> prev = res.get(rowIndex - 1);
+            row.add(1);
+            for(int j = 1; j < rowIndex; j++){
+                row.add(prev.get(j-1) + prev.get(j));
+            }
+            row.add(1);
+            res.add(row);
+        }
+
+        return res;
+    }
 }

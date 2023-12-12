@@ -9,6 +9,11 @@ package com.problemsolving.leetcode.easy;
  * @since 26.06.2022
  */
 public class BestTimeToBuyAndSellStock {
+    /**
+     * Time Limit Exceeded
+     * @param prices
+     * @return
+     */
     public int maxProfit(int[] prices) {
         int profit = 0;
         int n = prices.length;

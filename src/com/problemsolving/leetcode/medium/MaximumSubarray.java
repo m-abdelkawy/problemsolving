@@ -103,42 +103,38 @@ public class MaximumSubarray {
      * @return maximum sum of sub array
      */
     public int maxSubArray5(int[] nums) {
-        return findBestSubarray(nums, 0, nums.length - 1);
+        return findBestSubArray(nums, 0, nums.length - 1);
     }
 
-    private int findBestSubarray(int[] nums, int left, int right) {
+    private int findBestSubArray(int[] nums, int left, int right){
         // base case - empty array
-        if (left > right)
+        if(left > right){
             return Integer.MIN_VALUE;
+        }
 
         int mid = Math.floorDiv(left + right, 2);
-        int curr = 0;
+        int currentSum = 0;
         int bestLeftSum = 0, bestRightSum = 0;
 
-        // iterate left half
-        for (int i = mid - 1; i >= left; i--) {
-            curr += nums[i];
-            bestLeftSum = Math.max(bestLeftSum, curr);
-            System.out.println("current: " + curr + ",  bestLeftSum: " + bestLeftSum);
-        }
-        System.out.println();
-
-        //iterate right half
-        curr = 0;
-        for (int i = mid + 1; i < right; i++) {
-            curr += nums[i];
-            bestRightSum = Math.max(bestRightSum, curr);
-            System.out.println("current: " + curr + ",  bestRightSum: " + bestRightSum);
+        // left sum
+        for(int i = mid - 1; i >= left; i--){
+            currentSum += nums[i];
+            bestLeftSum = Math.max(currentSum, bestLeftSum);
         }
 
-        int bestCombinedSum = bestLeftSum + nums[mid] + bestRightSum;
-        System.out.println();
-        System.out.println(bestLeftSum + " + " + nums[mid] + " + " + bestRightSum + " = " + bestCombinedSum);
+        currentSum = 0;
+        // right sum
+        for(int i = mid + 1; i <= right; i++){
+            currentSum += nums[i];
+            bestRightSum = Math.max(currentSum, bestRightSum);
+        }
 
-        int leftSum = findBestSubarray(nums, left, mid - 1);
-        int rightSum = findBestSubarray(nums, mid + 1, right);
+        int bestSumCombined = bestLeftSum + nums[mid] + bestRightSum;
 
-        return Math.max(bestCombinedSum, Math.max(leftSum, rightSum));
+        int leftSum = findBestSubArray(nums, left, mid - 1);
+        int rightSum = findBestSubArray(nums, mid + 1, right);
+
+        return Math.max(bestSumCombined, Math.max(leftSum, rightSum));
     }
 
     public static void main(String[] args) {

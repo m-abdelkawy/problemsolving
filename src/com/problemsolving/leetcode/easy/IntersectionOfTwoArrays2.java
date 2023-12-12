@@ -1,9 +1,6 @@
 package com.problemsolving.leetcode.easy;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  * 350. Intersection of Two Arrays II
@@ -13,7 +10,7 @@ import java.util.stream.Stream;
  * @version 1.0.0
  * @since 26.06.2022
  */
-public class IntersectionOfTwoArrays {
+public class IntersectionOfTwoArrays2 {
     /**
      * O(nlogn + mlogm) solution
      * @param nums1 1st Array
@@ -158,7 +155,7 @@ public class IntersectionOfTwoArrays {
     }
 
     public static void main(String[] args) {
-        IntersectionOfTwoArrays intersection = new IntersectionOfTwoArrays();
+        IntersectionOfTwoArrays2 intersection = new IntersectionOfTwoArrays2();
 //        int[] nums1 = {1, 2, 2, 1};
 //        int[] nums2 = {2, 2};
 
