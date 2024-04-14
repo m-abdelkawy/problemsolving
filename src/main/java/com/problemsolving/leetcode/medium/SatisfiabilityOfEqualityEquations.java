@@ -1,7 +1,7 @@
 package com.problemsolving.leetcode.medium;
 
 /**
- * Problem: https://leetcode.com/problems/satisfiability-of-equality-equations/
+ * Problem: <a href="https://leetcode.com/problems/satisfiability-of-equality-equations/">satisfiability-of-equality-equations</a>
  * @author Mohammed Abdelkawy
  * @version 1.0.0
  * Solved using Union find algorithm
