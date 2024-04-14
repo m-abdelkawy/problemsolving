@@ -66,6 +66,25 @@ public class FindTheDifference {
     }
 
     public char findTheDifference4(String s, String t) {
+        int m = s.length();
+        int n = t.length();
+        Map<Character, Integer> map = new HashMap<>();
+        for(int i = 0; i < m; i++){
+            map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0) + 1);
+            map.put(t.charAt(i), map.getOrDefault(t.charAt(i), 0) - 1);
+        }
+        map.put(t.charAt(n - 1), map.getOrDefault(t.charAt(n - 1), 0) - 1);
+        char diff = '\0';
+        for(Map.Entry<Character, Integer> entry: map.entrySet()){
+            if(entry.getValue() != 0){
+                diff = entry.getKey();
+                break;
+            }
+        }
+        return diff;
+    }
+
+    public char findTheDifference5(String s, String t) {
         int[] chars = new int[26];
         for (int i = 0; i < s.length(); i++) {
             chars[s.charAt(i) - 'a']++;
@@ -82,7 +101,7 @@ public class FindTheDifference {
         return res;
     }
 
-    public char findTheDifference5(String s, String t) {
+    public char findTheDifference6(String s, String t) {
         char c = '\0';
         for (int i = 0; i < s.length(); i++) {
             c ^= s.charAt(i);
@@ -93,7 +112,7 @@ public class FindTheDifference {
         return c;
     }
 
-    public char findTheDifference6(String s, String t) {
+    public char findTheDifference7(String s, String t) {
         char res = '\0';
         for(int i = 0; i < s.length(); i++){
             res ^= s.charAt(i);

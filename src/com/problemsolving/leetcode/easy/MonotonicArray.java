@@ -54,6 +54,13 @@ public class MonotonicArray {
         return true;
     }
 
+    /**
+     * keeps track of {1, 0, -1}
+     * if c keeps equal store or if c does not equal store while store = 0, then it's monotonic
+     * if c does not equal store and store is not 0, then one of them is -1 and the other is 1, wich is not monotonic
+     * @param nums
+     * @return
+     */
     public boolean isMonotonic3(int[] nums) {
         int store = 0;
         for (int i = 0; i < nums.length - 1; i++) {

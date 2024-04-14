@@ -63,4 +63,9 @@ public class AddBinary {
         }
         return x.toString(2);
     }
+
+    public static void main(String[] args) {
+        double num = 123.56789;
+        System.out.println(Math.round(num * 100.0)/100.0);
+    }
 }

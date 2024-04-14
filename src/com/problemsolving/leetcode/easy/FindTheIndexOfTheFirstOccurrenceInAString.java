@@ -94,4 +94,20 @@ public class FindTheIndexOfTheFirstOccurrenceInAString {
 
         return index;
     }
+
+    public int strStr6(String haystack, String needle) {
+        int m = haystack.length();
+        int n = needle.length();
+        for(int i = 0; i < m - n + 1; i++){
+            if(haystack.charAt(i) == needle.charAt(0)){
+                String str = haystack.substring(i, i + n);
+                if(str.equals(needle)){
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
+
 }

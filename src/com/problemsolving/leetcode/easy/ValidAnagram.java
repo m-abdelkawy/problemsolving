@@ -40,6 +40,16 @@ public class ValidAnagram {
         String t_sorted = new String (chars2);
         return s_sorted.equals(t_sorted);
     }
+    public boolean isAnagram3(String s, String t) {
+        char[] chars = s.toCharArray();
+        Arrays.sort(chars);
+        String str1 = new String(chars);
+        chars = t.toCharArray();
+        Arrays.sort(chars);
+        String str2 = new String(chars);
+        return str1.equals(str2);
+    }
+
 
     public static void main(String[] args) {
 
