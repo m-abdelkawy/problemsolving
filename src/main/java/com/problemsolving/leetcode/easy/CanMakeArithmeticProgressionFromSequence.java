@@ -64,6 +64,48 @@ public class CanMakeArithmeticProgressionFromSequence {
         return nums.size() == n;
     }
 
+    public boolean canMakeArithmeticProgression4(int[] arr) {
+        int mn = 0;
+        int mx = 0;
+        boolean[] mem = new boolean[arr.length];
+        int n = arr.length - 1;
+        for(int i = 1; i <= n; i++)
+        {
+            if(arr[i] < arr[mn])
+            {
+                mn = i;
+            }
+            else if(arr[i] > arr[mx])
+            {
+                mx = i;
+            }
+        }
+
+        if(arr[mn] == arr[mx])
+            return true;
+
+        if((arr[mx] - arr[mn]) % n != 0)
+            return false;
+        int d = (arr[mx] - arr[mn]) / n;
+
+        mem[0] = true;
+        mem[n] = true;
+
+        for(int i = 0; i <= n; i++)
+        {
+            if(i == mn || i == mx)
+                continue;
+            if((arr[i] - arr[mn]) % d != 0)
+                return false;
+            int di = (arr[i] - arr[mn]) / d;
+            if(mem[di])
+                return false;
+            mem[di] = true;
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         int[] arr = {1,2,4};
         System.out.println(canMakeArithmeticProgression3(arr));

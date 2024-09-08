@@ -89,6 +89,23 @@ public class MonotonicArray {
         return increasing || decreasing;
     }
 
+    public boolean isMonotonic5(int[] nums) {
+        if(nums[0] < nums[nums.length - 1]){
+            for(int i = 0; i < nums.length - 1; i++){
+                if(nums[i] > nums[i+1]){
+                    return false;
+                }
+            }
+        }else{
+            for(int i = 0; i < nums.length - 1; i++){
+                if(nums[i] < nums[i+1]){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println(Integer.compare(1, 2));
     }

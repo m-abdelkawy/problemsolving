@@ -123,6 +123,17 @@ public class FindTheDifference {
         return res;
     }
 
+    public char findTheDifference8(String s, String t) {
+        int r = 0, q = 0;
+        for(char c: s.toCharArray()){
+            r += (int)c;
+        }
+        for(char c: t.toCharArray()){
+            q += (int)c;
+        }
+        return (char)(q-r);
+    }
+
     public static void main(String[] args) {
 
     }

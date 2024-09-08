@@ -1,5 +1,13 @@
 package com.problemsolving.leetcode.easy;
 
+/**
+ * 58. Length of Last Word
+ * Link: https://leetcode.com/problems/length-of-last-word/description/
+ *
+ * @author m-abdelkawy
+ * @version 1.0.0
+ * @since 10.05.2023
+ */
 public class LengthOfLastWord {
     public int lengthOfLastWord1(String s) {
         String[] arr = s.split(" ");
