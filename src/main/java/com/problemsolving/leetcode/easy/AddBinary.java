@@ -65,7 +65,8 @@ public class AddBinary {
     }
 
     public static void main(String[] args) {
-        double num = 123.56789;
-        System.out.println(Math.round(num * 100.0)/100.0);
+        String a = "1010", b = "1011";
+        AddBinary addition = new AddBinary();
+        System.out.println(addition.addBinary3(a, b));
     }
 }

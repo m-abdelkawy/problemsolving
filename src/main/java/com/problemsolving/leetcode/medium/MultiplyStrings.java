@@ -96,6 +96,33 @@ public class MultiplyStrings {
         throw  new UnsupportedOperationException();
     }
 
+    public String multiply3(String num1, String num2) {
+        int[] res = new int[num1.length() + num2.length()];
+        for(int i = 0; i < num1.length(); i++){
+            for(int j = 0; j < num2.length(); j++){
+                int digit1 = num1.charAt(i) - '0';
+                int digit2 = num2.charAt(j) - '0';
+
+                res[i + j + 1] += digit1 * digit2;
+            }
+        }
+        int carry = 0;
+        for(int i = res.length - 1; i >= 0; i--){
+            res[i] += carry;
+            int mod = res[i] % 10;
+            carry = res[i] / 10;
+            res[i] = mod;
+        }
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < res.length; i++){
+            sb.append(res[i]);
+        }
+        while(sb.charAt(0) == '0' && sb.length() > 1){
+            sb.deleteCharAt(0);
+        }
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
         String num1 = "207";
         String num2 = "30";
