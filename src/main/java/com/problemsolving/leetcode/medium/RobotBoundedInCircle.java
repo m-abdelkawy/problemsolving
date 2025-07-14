@@ -39,6 +39,9 @@ public class RobotBoundedInCircle {
             }
         }
 
+        //basically the robot is bounded in a circle if either
+        //1. it ends back at the origin
+        //2. it does not face north after one full instruction set (eventually loops when the instruction set is repeated)
         return (pos[0] == 0 && pos[1] == 0) || dir != 0;
     }
 

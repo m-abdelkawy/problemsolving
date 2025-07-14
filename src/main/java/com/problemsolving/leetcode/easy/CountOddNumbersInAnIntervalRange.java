@@ -12,6 +12,7 @@ package com.problemsolving.leetcode.easy;
 
 // time limit exceeded
 public class CountOddNumbersInAnIntervalRange {
+    //time limit exeeded case 82/84
     public int countOdds1(int low, int high) {
         int count = 0;
         for (int i = low; i <= high; i++) {

@@ -64,7 +64,7 @@ public class CanMakeArithmeticProgressionFromSequence {
         return nums.size() == n;
     }
 
-    public boolean canMakeArithmeticProgression4(int[] arr) {
+    public static boolean canMakeArithmeticProgression4(int[] arr) {
         int mn = 0;
         int mx = 0;
         boolean[] mem = new boolean[arr.length];
@@ -107,7 +107,8 @@ public class CanMakeArithmeticProgressionFromSequence {
     }
 
     public static void main(String[] args) {
-        int[] arr = {1,2,4};
-        System.out.println(canMakeArithmeticProgression3(arr));
+//        int[] arr = {1,2, 2,4};
+        int[] arr = {2,10,7,8,3};
+        System.out.println(canMakeArithmeticProgression4(arr));
     }
 }

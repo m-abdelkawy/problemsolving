@@ -35,7 +35,7 @@ public class MatrixDiagonalSum {
         }
 
         for (int i = 0; i < m; i++) {
-            //main diagonal
+            //primary diagonal
             sum += mat[i][i];
             //secondary diagonal
             sum += mat[i][m - i - 1];

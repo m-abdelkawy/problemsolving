@@ -1,5 +1,13 @@
 package com.problemsolving.leetcode.medium;
 
+/**
+ * 43. Multiply Strings
+ * Link: https://leetcode.com/problems/multiply-strings/
+ *
+ * @author Mohammed Abdelkawy
+ * @version 1.0.0
+ * @since 07.08.2025
+ */
 public class MultiplyStrings {
     public String multiply(String num1, String num2) {
         // reverse numbers to multiply from right to left
@@ -116,6 +124,34 @@ public class MultiplyStrings {
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < res.length; i++){
             sb.append(res[i]);
+        }
+        while(sb.charAt(0) == '0' && sb.length() > 1){
+            sb.deleteCharAt(0);
+        }
+        return sb.toString();
+    }
+
+    public String multiply4(String num1, String num2) {
+        int[] arr = new int[num1.length() + num2.length()];
+        int maxLength = 0;
+        for(int i = 0; i < num1.length(); i++){
+            for(int j = 0; j < num2.length(); j++){
+                arr[i+j] += (num1.charAt(i) - '0') * (num2.charAt(j) - '0');
+                maxLength = i + j;
+            }
+        }
+        int carry = 0, mod = 0;
+        StringBuilder sb = new StringBuilder();
+        for(int i = maxLength; i >= 0; i--){
+            mod = arr[i] % 10;
+            carry = arr[i] / 10;
+            if(i-1 >= 0){
+                arr[i-1]+=carry;
+            }
+            sb.insert(0, mod);
+        }
+        if(carry != 0){
+            sb.insert(0, carry);
         }
         while(sb.charAt(0) == '0' && sb.length() > 1){
             sb.deleteCharAt(0);

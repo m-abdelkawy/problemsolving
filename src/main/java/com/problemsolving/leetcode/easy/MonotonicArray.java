@@ -75,7 +75,7 @@ public class MonotonicArray {
         return true;
     }
 
-    public boolean isMonotonic4(int[] nums) {
+    public static boolean isMonotonic4(int[] nums) {
         boolean increasing = true;
         boolean decreasing = true;
 
@@ -107,6 +107,7 @@ public class MonotonicArray {
     }
 
     public static void main(String[] args) {
-        System.out.println(Integer.compare(1, 2));
+        int[] arr = {1,2,3,2};
+        System.out.println(isMonotonic4(arr));
     }
 }
