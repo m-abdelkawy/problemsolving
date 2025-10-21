@@ -1,3 +1,6 @@
+# LL: Find Kth Node From End ( ** Interview Question)
+# url: https://gale.udemy.com/course/data-structures-algorithms-python/learn/quiz/5795286#overview
+
 class Node:
     def __init__(self, value):
         self.value = value
@@ -25,8 +28,8 @@ def find_kth_from_end(ll, k):
     while ptr:
         sz += 1
         ptr = ptr.next
-    print(ptr)
-    print(sz)
+    if k < 1 or k > sz:
+        return None
     ptr = ll.head
     pos = sz - k + 1
     for _ in range(pos - 1):
