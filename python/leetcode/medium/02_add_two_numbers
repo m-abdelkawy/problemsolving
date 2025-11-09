@@ -1,0 +1,92 @@
+# Problem: 2. Add Two Numbers
+# Level: Medium
+# Tags: LinkedList
+# Link: https://leetcode.com/problems/add-two-numbers/description/
+# Date Solved: 2025.11.08
+
+# Definition for singly linked list
+class ListNode(object):
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+    def __str__(self):
+        res = []
+        current = self
+        while current:
+            res.append(str(current.val))
+            current = current.next
+        return  " -> ".join(res)
+
+class Solution(object):
+    
+    # Time Complexity: O(max(m, n))
+
+    def addTwoNumbers(self, l1, l2):
+        dummyHead = ListNode(0)
+        current = dummyHead
+        carry = 0
+        while(l1 is not None or l2 is not None or carry != 0):
+            x = l1.val if l1 is not None else 0
+            y = l2.val if l2 is not None else 0
+            sum = x + y + carry
+            carry = sum//10
+            current.next = ListNode(sum%10)
+            current = current.next
+            if(l1 is not None):
+                l1 = l1.next
+            if(l2 is not None):
+                l2 = l2.next
+        return dummyHead.next
+    
+    def addTwoNumbers2(self, l1, l2):
+        #convert l1 to number a
+        multiplier = 1
+        a = 0
+        while l1:
+            a += l1.val * multiplier
+            multiplier *= 10
+            l1 = l1.next
+        
+        #convert l2 to number b
+        multiplier = 1
+        b = 0
+        while l2:
+            b += l2.val * multiplier
+            multiplier *= 10
+            l2 = l2.next
+
+        #sum and convert sum to linked list
+        sum = a + b
+        if sum == 0:
+            return ListNode(0)
+
+        dummyHead = ListNode(0)
+        current = dummyHead
+
+        while sum > 0:
+            current.next = ListNode(sum % 10)
+            sum = sum // 10
+            current = current.next
+        return dummyHead.next
+    
+
+if __name__ == "__main__":
+    l1 = ListNode(2)
+    l1.next = ListNode(4)
+    l1.next.next = ListNode(3)
+    
+    
+    l2 = ListNode(5)
+    l2.next = ListNode(6)
+    l2.next.next = ListNode(4)
+
+
+    print("original lists: ")
+    print(l1)
+    print(l2)
+
+    sol = Solution()
+
+    sum = sol.addTwoNumbers2(l1, l2)
+    print("after addition: ")
+    print(sum)
