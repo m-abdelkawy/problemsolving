@@ -6,6 +6,11 @@ import java.util.stream.Collectors;
 /**
  * 49. Group Anagrams
  * Link: https://leetcode.com/problems/group-anagrams/
+ *
+ *
+ * @author Mohammed Abdelkawy
+ * @version 1.0.0
+ * @since 03.18.2025
  */
 public class GroupAnagrams {
     /**
@@ -89,7 +94,8 @@ public class GroupAnagrams {
     /*--------------------------------------------------------------*/
 
     /**
-     * O(n * m) time
+     * O(n * m) time where n is the input size (size of the array),
+     * and m is the size of the string itself processed in the hashString method
      * @param strs
      * @return
      */
@@ -113,6 +119,39 @@ public class GroupAnagrams {
 
     private String hashString(String str, int[] count){
         for(char c: str.toCharArray()){
+            count[c - 'a']++;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < count.length; i++){
+            sb.append("#").append(count[i]);
+        }
+        return sb.toString();
+    }
+
+    /*--------------------------------------------------------------*/
+
+    /**
+     * O(n * m) time where n is the input size (size of the array),
+     * and m is the size of the string itself processed in the hashString method
+     * @param strs
+     * @return
+     */
+    public List<List<String>> groupAnagrams6(String[] strs) {
+
+        Map<String, List<String>> map = new HashMap<>();
+        for (String str: strs) {
+            String key = hashString(str);
+            map.computeIfAbsent(key, k -> new ArrayList<>()).add(str);
+        }
+
+        return new ArrayList<>(map.values());
+    }
+
+    private String hashString(String str){
+        int[] count = new int[26];
+        char[] chars = str.toCharArray();
+        for(char c: chars){
             count[c - 'a']++;
         }
 
