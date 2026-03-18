@@ -5,6 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.IntStream;
 
+/**
+ * 1. Two Sum
+ * Link: https://leetcode.com/problems/two-sum/description/
+ *
+ * @author Mohammed Abdelkawy
+ * @version 1.0.0
+ * @since 23.06.2022
+ */
 public class TwoSum {
     /**
      * O(n^2) brute force solution
@@ -73,7 +81,7 @@ public class TwoSum {
     }
 
     /**
-     * Linear time solution using hashMap
+     * Linear time solution using hashMap, O(n)
      * @param nums
      * @param target
      * @return
