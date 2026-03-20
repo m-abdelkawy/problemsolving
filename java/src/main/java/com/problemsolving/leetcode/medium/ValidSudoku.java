@@ -12,6 +12,14 @@ import java.util.Set;
  * @since 27.06.2022
  */
 public class ValidSudoku {
+
+    /**
+     * input size = n (one side length)
+     * Time Complexity: O(n^2) as we loop over rows and cols
+     * Space Complexity: O(n^2), we have 3 arrays of n size, each holding n elements [3 * n * n]
+     * @param board
+     * @return
+     */
     public boolean isValidSudoku(char[][] board) {
         Set<Integer>[] rows = new HashSet[9];
         Set<Integer>[] cols = new HashSet[9];
@@ -46,6 +54,39 @@ public class ValidSudoku {
         return true;
     }
 
+    public boolean isValidSudoku1(char[][] board) {
+        int n = board.length;
+        Set<Integer>[] rows = new HashSet[n];
+        Set<Integer>[] cols = new HashSet[n];
+        Set<Integer>[] squares = new HashSet[n];
+
+        for(int i = 0; i < n; i++){
+            rows[i] = new HashSet<>();
+            cols[i] = new HashSet<>();
+            squares[i] = new HashSet<>();
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if(board[i][j] == '.') continue;
+
+                int k = 3 * (i/3) + (j/3);
+
+                int num = board[i][j] - '0';
+
+                if(!rows[i].add(num) || !cols[j].add(num) || !squares[k].add(num)){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     *
+     * @param board
+     * @return
+     */
     public boolean isValidSudoku2(char[][] board) {
         Set<String> seen = new HashSet<>();
         for (int i = 0; i < 9; i++) {
@@ -99,6 +140,79 @@ public class ValidSudoku {
         return true;
     }
 
+    /**
+     * Time Complexity O(n^2)
+     * Space Complexity: O(n)
+     * @param board
+     * @return
+     */
+    public boolean isValidSudoku3(char[][] board) {
+        int row = board.length;
+        int col = board[0].length;
+
+        Set<Integer> rowSet = new HashSet();
+        Set<Integer> colSet = new HashSet();
+        Set<Integer> blockSet = new HashSet();
+
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                //check cols
+                int num = board[i][j] == '.' ? -1 : board[i][j] - '0';
+                if (num == -1)
+                    continue;
+                if (rowSet.contains(num)) {
+                    return false;
+                } else {
+                    rowSet.add(num);
+                }
+            }
+            rowSet.clear();
+        }
+
+        for (int i = 0; i < col; i++) {
+            for (int j = 0; j < row; j++) {
+                //check rows
+                int num = board[j][i] == '.' ? -1 : board[j][i] - '0';
+                if (num == -1)
+                    continue;
+                if (colSet.contains(num)) {
+                    return false;
+                } else {
+                    colSet.add(num);
+                }
+            }
+            colSet.clear();
+        }
+
+        int kRow = 0;
+        for (int k = 0; k < 9; k++) {
+            // calc which col the block starts at
+            int k3Col = (3 * k) % 9;
+            if (k3Col == 0 && k > 0) {
+                kRow += 3;
+            }
+
+//            int k3Row = (kRow % 3) * 3 + 3;
+
+            for (int i = kRow; i < kRow + 3; i++) {
+                for (int j = k3Col; j < k3Col + 3; j++) {
+                    //check rows
+                    int num = board[i][j] == '.' ? -1 : board[i][j] - '0';
+                    if (num == -1)
+                        continue;
+                    if (blockSet.contains(num)) {
+                        return false;
+                    } else {
+                        blockSet.add(num);
+                    }
+                }
+            }
+            blockSet.clear();
+        }
+        return true;
+    }
+
     public boolean isValidSudoku3(String[][] board) {
         int row = board.length;
         int col = board[0].length;
@@ -123,10 +237,10 @@ public class ValidSudoku {
             rowSet.clear();
         }
 
-        for (int i = 0; i < col; i++) {
-            for (int j = 0; j < row; j++) {
-                //check rows
-                int num = board[i][j] == "." ? -1 : Integer.parseInt(board[i][j]);
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                //check cols
+                int num = board[j][i] == "." ? -1 : Integer.parseInt(board[j][i]);
                 if (num == -1)
                     continue;
                 if (colSet.contains(num)) {
