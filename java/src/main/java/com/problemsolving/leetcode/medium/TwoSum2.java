@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  * 167. Two Sum II - Input Array Is Sorted
- * Link: https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/?envType=study-plan&id=algorithm-i
+ * Link: https://leetcode.com/problems/two-sum-ii-input-array-is-sorted
  *
  * @author Mohammed Abdelkawy
  * @version 1.0.0
@@ -47,6 +47,7 @@ public class TwoSum2 {
     public int[] twoSum2(int[] numbers, int target) {
         int[] result = new int[2];
 
+        // <number, index> map
         Map<Integer, Integer> indexMap = new HashMap<>();
         for (int i = 0; i < numbers.length; i++) {
             int first = numbers[i];
