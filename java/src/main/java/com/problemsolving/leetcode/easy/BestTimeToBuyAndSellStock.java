@@ -6,7 +6,7 @@ package com.problemsolving.leetcode.easy;
  *
  * @author Mohammed Abdelkawy
  * @version 1.0.0
- * @since 26.06.2022
+ * @since 29.03.2026
  */
 public class BestTimeToBuyAndSellStock {
     /**
@@ -28,17 +28,13 @@ public class BestTimeToBuyAndSellStock {
 
     public int maxProfit2(int[] prices) {
         int n = prices.length;
-        int profit = 0;
+        int maxProfit = Integer.MIN_VALUE;
         int minPrice = Integer.MAX_VALUE;
-
-        for (int i = 0; i < n; i++) {
+        for(int i = 0; i < n; i++){
             minPrice = Math.min(minPrice, prices[i]);
-
-            profit = Math.max(profit, prices[i]-minPrice);
+            maxProfit = Math.max(maxProfit, prices[i] - minPrice);
         }
-
-
-        return profit;
+        return maxProfit;
     }
 
     public int maxProfit3(int[] prices) {
