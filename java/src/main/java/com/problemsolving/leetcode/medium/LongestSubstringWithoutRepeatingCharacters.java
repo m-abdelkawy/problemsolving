@@ -17,6 +17,9 @@ public class LongestSubstringWithoutRepeatingCharacters {
     /**
      * Brute Force Algorithm
      * "Time Limit Exceeded"
+     * <p>
+     * Time complexity: O(n^3), outer, inner loops and the loop in the isRepeated method
+     * Space complexity: O(n) as hashset holds at most n elements
      *
      * @param s input string
      * @return length of longest substring without repeated characters
@@ -126,6 +129,55 @@ public class LongestSubstringWithoutRepeatingCharacters {
         }
 
         return maxLen;
+    }
+
+    /**
+     * Sliding window using hashset
+     * <p>
+     * Time complexity: O(n) — left and right each traverse at most n steps total
+     * Space complexity: O(n), the hashset holds n elements at max
+     *
+     * @param s input string
+     * @return length of longest substring without repeated characters
+     */
+    public int lengthOfLongestSubstring5(String s) {
+        int left = 0, right = 0, maxLen = 0;
+        int N = s.length();
+        Set<Character> seen = new HashSet<>();
+        while(right < N){
+            if(!seen.add(s.charAt(right))){
+                maxLen = Math.max(maxLen, right - left);
+                seen.remove(s.charAt(left));
+                left++;
+                continue;
+            }
+            right++;
+        }
+        return Math.max(maxLen, right - left);
+    }
+
+    /**
+     * Sliding window using hashset
+     * <p>
+     * Time complexity: O(n) one loop, each element is traversed once
+     * Space complexity: O(n), the hashset holds n elements at max
+     *
+     * @param s input string
+     * @return length of longest substring without repeated characters
+     */
+    public int lengthOfLongestSubstring6(String s) {
+        int maxLength = 0, N = s.length();
+        int left = 0, right = 0;
+        Set<Character> seen = new HashSet<>();
+        while (right < N) {
+            while(seen.contains(s.charAt(right))) {
+                seen.remove(s.charAt(left++));
+            }
+            seen.add(s.charAt(right));
+            maxLength = Math.max(maxLength, right - left + 1);
+            right++;
+        }
+        return maxLength;
     }
 
     public static void main(String[] args) {
