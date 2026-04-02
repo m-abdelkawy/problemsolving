@@ -91,7 +91,7 @@ public class PermutationInString {
                 char c = s.charAt(j);
                 s2Map.put(c, s2Map.getOrDefault(c, 0) + 1);
             }
-            if(matches(s1Map, s2Map)){
+            if (matches(s1Map, s2Map)) {
                 return true;
             }
         }
@@ -124,7 +124,7 @@ public class PermutationInString {
                 char c = s2.charAt(i + j);
                 s2Map.put(c, s2Map.getOrDefault(c, 0) + 1);
             }
-            if(matches(s1Map, s2Map)){
+            if (matches(s1Map, s2Map)) {
                 return true;
             }
         }
@@ -173,6 +173,7 @@ public class PermutationInString {
     }
 
     /*---------------------------------------Sliding Window approach-------------------------------------------*/
+
     /**
      * Sliding Window approach
      *
@@ -204,6 +205,7 @@ public class PermutationInString {
         return matches(s1map, s2map);
     }
     /*---------------------------------------Sliding Window Optimized approach-------------------------------------------*/
+
     /**
      * Sliding Window Optimized
      *
@@ -247,7 +249,96 @@ public class PermutationInString {
         return count == 26;
     }
 
+    /*--------------Sliding Window Optimized approach------------------------------*/
 
+    /**
+     * Time Complexity: O(n) One pass over s2, each step O(26) = O(1)
+     * Space Complexity: O(1) Two fixed arrays of 26 characters
+     *
+     * @param s1
+     * @param s2
+     * @return
+     */
+    public boolean checkInclusion8(String s1, String s2) {
+        if (s2.length() < s1.length()) return false;
+        int left = 0, right = s1.length() - 1;
+        int[] s1Freq = new int[26];
+        for (char c : s1.toCharArray()) {
+            s1Freq[c - 'a']++;
+        }
+
+        int[] windowFrequency = new int[26];
+        for (int i = 0; i < s1.length(); i++) {
+            windowFrequency[s2.charAt(i) - 'a']++;
+        }
+        right++;
+        while (right < s2.length()) {
+            if (arraysEqual(s1Freq, windowFrequency)) {
+                return true;
+            }
+            windowFrequency[s2.charAt(left) - 'a']--;
+            windowFrequency[s2.charAt(right) - 'a']++;
+            left++;
+            right++;
+        }
+        return arraysEqual(s1Freq, windowFrequency);
+    }
+
+    private boolean arraysEqual(int[] a, int[] b) {
+        for (int i = 0; i < b.length; i++) {
+            if (a[i] != b[i]) return false;
+        }
+        return true;
+    }
+
+    /*--------------Sliding Window Optimized approach------------------------------*/
+
+    /**
+     *
+     * @param s1
+     * @param s2
+     * @return
+     */
+    public boolean checkInclusion9(String s1, String s2) {
+        if (s2.length() < s1.length()) return false;
+        int[] s1Freq = new int[26];
+        int[] windowFreq = new int[26];
+
+        for (int i = 0; i < s1.length(); i++) {
+            s1Freq[s1.charAt(i) - 'a']++;
+            //build first window
+            windowFreq[s2.charAt(i) - 'a']++;
+        }
+
+        int matches = 0;
+        for (int i = 0; i < 26; i++) {
+            if (s1Freq[i] == windowFreq[i]) {
+                matches++;
+            }
+        }
+
+        int left = 0, right = s1.length();
+        while(right < s2.length()){
+            if(matches == 26) return true;
+
+            // add new right character and update matches
+            int rIndex = s2.charAt(right) - 'a';
+            windowFreq[rIndex]++;
+            if(s1Freq[rIndex] == windowFreq[rIndex]) matches++;
+            else if(s1Freq[rIndex] == windowFreq[rIndex] - 1) matches--;
+
+            // remove old left character and update matches
+            int lIndex = s2.charAt(left) - 'a';
+            windowFreq[lIndex]--;
+            if(s1Freq[lIndex] == windowFreq[lIndex]) matches++;
+            else if(s1Freq[lIndex] == windowFreq[lIndex]+1) matches--;
+
+            left++;
+            right++;
+        }
+
+        return matches == 26;
+    }
 
     public static void main(String[] args) {
         String s1 = "ab", s2 = "eidbaooo";
