@@ -24,6 +24,13 @@ public class LinkedListCycle {
     }
 
     // the fastest
+
+    /**
+     * Time complexity: O(n)
+     * Space complexity: O(1)
+     * @param head
+     * @return
+     */
     public boolean hasCycle(ListNode head) {
         ListNode  slow = head;
         ListNode fast = head;
