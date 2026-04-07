@@ -37,29 +37,34 @@ public class ReverseLinkedList {
         b.val = temp;
     }
 
+    /**
+     * bubble sort like algorithm, each pass bubbles the head value towards the end (at the last position that changes with each pass -- moves to the left)
+     *
+     * Time Complexity: O(n2)
+     * Space Complexity: O(1)
+     *
+     * @param head
+     * @return
+     */
     public ListNode reverseList(ListNode head) {
-        if(head == null)
-            return head;
-        if(head.next == null)
-            return head;
-
+        // swap values like bubble sort
+        if(head == null || head.next == null) return head;
         ListNode ptr = head;
         ListNode last = null;
-
-
-        while (ptr != last) {
-            while (ptr.next != last) {
+        while(ptr != last){
+            while(ptr.next != last){
                 swap(ptr, ptr.next);
                 ptr = ptr.next;
-                if(ptr.next == last){
-                    break;
-                }
             }
+            // move last by 1 to the left each iteration
             last = ptr;
+            // reset the ptr
             ptr = head;
         }
         return head;
     }
+
+
 
     public ListNode reverseList2(ListNode head) {
         List<Integer> lst = new ArrayList<>();
@@ -92,6 +97,13 @@ public class ReverseLinkedList {
         a[j]=temp;
     }
 
+    /**
+     * Time Complextiy: O(n), each node is treversed once
+     * Space Complexity: O(1), no extra DS introduced
+     *
+     * @param head
+     * @return
+     */
     public ListNode reverseList3(ListNode head) {
         ListNode prev = null;
         ListNode current = head;
@@ -107,6 +119,20 @@ public class ReverseLinkedList {
         return prev;
     }
 
+    /**
+     * Recursive approach
+     * Time complexity: O(n)
+     * Space complexity: O(n) because the call stack holds n frames
+     *
+     * the newHead is assigned once at the end, at the base case to point at the last node
+     * and then the input the recursive function is the list minus one node from the left each time
+     * i.e. the head moves one node to the right
+     * and unwinding we make the head.next.next point at the head
+     * and break the cycle by assigning null to the head.next
+     *
+     * @param head
+     * @return
+     */
     public ListNode reverseList4(ListNode head) {
         if(head == null || head.next == null)
             return head;
