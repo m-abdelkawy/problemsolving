@@ -27,45 +27,44 @@ public class MergeTwoSortedLists {
     }
 
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
-        if(list1 == null && list2 == null)
+        if (list1 == null && list2 == null)
             return null;
-        if(list1 == null)
+        if (list1 == null)
             return list2;
-        if(list2 == null)
+        if (list2 == null)
             return list1;
         ListNode i = list1;
         ListNode j = list2;
         ListNode head;
         ListNode ptr;
-        if(i.val <= j.val){
+        if (i.val <= j.val) {
             head = new ListNode(i.val);
             i = i.next;
-        }else{
+        } else {
             head = new ListNode(j.val);
             j = j.next;
         }
         ptr = head;
 
-        while(i != null || j != null){
-            if(i == null){
-                while(j != null){
+        while (i != null || j != null) {
+            if (i == null) {
+                while (j != null) {
                     ptr.next = new ListNode(j.val);
                     j = j.next;
                     ptr = ptr.next;
                 }
-            }
-            else if(j == null){
-                while(i != null){
+            } else if (j == null) {
+                while (i != null) {
                     ptr.next = new ListNode(i.val);
                     i = i.next;
                     ptr = ptr.next;
                 }
-            }else{
-                if(i.val <= j.val){
+            } else {
+                if (i.val <= j.val) {
                     ptr.next = new ListNode(i.val);
                     i = i.next;
                     ptr = ptr.next;
-                }else{
+                } else {
                     ptr.next = new ListNode(j.val);
                     j = j.next;
                     ptr = ptr.next;
@@ -76,11 +75,11 @@ public class MergeTwoSortedLists {
     }
 
     public ListNode mergeTwoLists2(ListNode list1, ListNode list2) {
-        if(list1 == null && list2 == null)
+        if (list1 == null && list2 == null)
             return null;
-        if(list1 == null)
+        if (list1 == null)
             return list2;
-        if(list2 == null)
+        if (list2 == null)
             return list1;
 
         ListNode ptr = null;
@@ -89,40 +88,38 @@ public class MergeTwoSortedLists {
         ListNode ptr1 = list1;
         ListNode ptr2 = list2;
 
-        if(list1.val <= list2.val){
+        if (list1.val <= list2.val) {
             head = list1;
             ptr = head;
             ptr1 = ptr1.next;
-        }else{
+        } else {
             head = list2;
             ptr = head;
             ptr2 = ptr2.next;
         }
 
-        while(ptr != null){
+        while (ptr != null) {
 
-            if(ptr1 == null){
-                while(ptr != null && ptr2 != null){
+            if (ptr1 == null) {
+                while (ptr != null && ptr2 != null) {
                     ptr.next = ptr2;
                     ptr = ptr.next;
                     ptr2 = ptr2.next;
                 }
                 break;
-            }else if(ptr2 == null){
-                while(ptr != null && ptr1 != null){
+            } else if (ptr2 == null) {
+                while (ptr != null && ptr1 != null) {
                     ptr.next = ptr1;
                     ptr = ptr.next;
                     ptr1 = ptr1.next;
                 }
                 break;
             }
-            if(ptr1.val <= ptr2.val){
+            if (ptr1.val <= ptr2.val) {
                 ptr.next = ptr1;
                 ptr = ptr.next;
                 ptr1 = ptr1.next;
-            }
-
-            else{
+            } else {
                 ptr.next = ptr2;
                 ptr = ptr.next;
                 ptr2 = ptr2.next;
@@ -135,18 +132,25 @@ public class MergeTwoSortedLists {
         return head;
     }
 
+    /**
+     * Time complexity: O(n + m)
+     * Space Complexity: O(n + m) for the call stack holds (n+m) frames
+     * @param list1
+     * @param list2
+     * @return
+     */
     public ListNode mergeTwoLists3(ListNode list1, ListNode list2) {
-        if(list1 == null)
+        if (list1 == null)
             return list2;
-        if(list2 == null)
+        if (list2 == null)
             return list1;
 
         ListNode head = null;
 
-        if(list1.val <= list2.val){
+        if (list1.val <= list2.val) {
             head = list1;
             head.next = mergeTwoLists3(list1.next, list2);
-        }else{
+        } else {
             head = list2;
             head.next = mergeTwoLists3(list1, list2.next);
         }
@@ -154,22 +158,32 @@ public class MergeTwoSortedLists {
         return head;
     }
 
+    /**
+     * Iterative approch
+     * Time complexity: O(n + m)
+     * Space complexity: O(1)
+     * @param list1
+     * @param list2
+     * @return
+     */
     public ListNode mergeTwoLists4(ListNode list1, ListNode list2) {
         ListNode prehead = new ListNode(-1);
 
         ListNode ptr = prehead;
-        while(list1 != null && list2 != null){
-            if(list1.val <= list2.val){
+        while (list1 != null && list2 != null) {
+            if (list1.val <= list2.val) {
                 ptr.next = list1;
                 list1 = list1.next;
-            }else{
+            } else {
                 ptr.next = list2;
                 list2 = list2.next;
             }
             ptr = ptr.next;
         }
 
-        ptr.next = list1 == null?list2:list1;
+        ptr.next = list1 == null ? list2 : list1;
+        //or
+        //ptr.next = ptr.next == list1? list2 : list1;
         return prehead.next;
     }
 }
