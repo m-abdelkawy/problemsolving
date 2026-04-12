@@ -10,7 +10,7 @@ package com.problemsolving.leetcode.medium;
  */
 public class ReorderList {
 
-    public class ListNode {
+    private class ListNode {
         int val;
         ListNode next;
 
