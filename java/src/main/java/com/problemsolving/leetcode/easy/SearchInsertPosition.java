@@ -10,13 +10,14 @@ package com.problemsolving.leetcode.easy;
  */
 public class SearchInsertPosition {
     public int searchInsert(int[] nums, int target) {
-        int lo = 0, hi = nums.length-1;
+        int lo = 0, hi = nums.length - 1;
         return binarySearchRecursive(nums, target, lo, hi);
     }
 
     /**
      * Time Complexity: O(log n)
      * Space Complexity: O(log n), since the call stack holds (log n) frames, the recursion depth is logarithmic.
+     *
      * @param nums
      * @param target
      * @param lo
@@ -24,33 +25,33 @@ public class SearchInsertPosition {
      * @return
      */
     private int binarySearchRecursive(int[] nums, int target, int lo, int hi) {
-        if(lo > hi)
-            return lo + 1;
-
+        if (lo > hi) return lo;
         int mid = lo + (hi - lo) / 2;
-        if(nums[mid] == target)
+        if (target == nums[mid]) {
             return mid;
-        else if(nums[mid] < target)
-            return binarySearchRecursive(nums, target, lo, mid - 1);
-        else
+        } else if (target > nums[mid]) {
             return binarySearchRecursive(nums, target, mid + 1, hi);
+        } else {
+            return binarySearchRecursive(nums, target, lo, mid - 1);
+        }
     }
 
     /**
      * Time Complexity: O(log n)
      * Space Complexity: O(1)
+     *
      * @param nums
      * @param target
      * @param lo
      * @param hi
      * @return
      */
-    private int binarySearchIterative(int[] nums, int target, int lo, int hi){
-        while(lo <= hi){
+    private int binarySearchIterative(int[] nums, int target, int lo, int hi) {
+        while (lo <= hi) {
             int mid = lo + (hi - lo) / 2;
-            if(target == nums[mid])
+            if (target == nums[mid])
                 return mid;
-            else if(target < nums[mid])
+            else if (target < nums[mid])
                 hi = mid - 1;
             else
                 lo = mid + 1;
