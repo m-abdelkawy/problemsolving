@@ -14,6 +14,15 @@ public class SearchInsertPosition {
         return binarySearchRecursive(nums, target, lo, hi);
     }
 
+    /**
+     * Time Complexity: O(log n)
+     * Space Complexity: O(log n), since the call stack holds (log n) frames, the recursion depth is logarithmic.
+     * @param nums
+     * @param target
+     * @param lo
+     * @param hi
+     * @return
+     */
     private int binarySearchRecursive(int[] nums, int target, int lo, int hi) {
         if(lo > hi)
             return lo + 1;
@@ -27,6 +36,15 @@ public class SearchInsertPosition {
             return binarySearchRecursive(nums, target, mid + 1, hi);
     }
 
+    /**
+     * Time Complexity: O(log n)
+     * Space Complexity: O(1)
+     * @param nums
+     * @param target
+     * @param lo
+     * @param hi
+     * @return
+     */
     private int binarySearchIterative(int[] nums, int target, int lo, int hi){
         while(lo <= hi){
             int mid = lo + (hi - lo) / 2;
