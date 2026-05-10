@@ -14,11 +14,20 @@ public class BinarySearch704 {
         return binarySearchRecursive(nums, target, lo, hi);
     }
 
+    /**
+     * Time Complexity: O(log n)
+     * Space Complexity: O(log n), since the call stack holds (log n) frames, the recursion depth is logarithmic.
+     * @param nums
+     * @param target
+     * @param lo
+     * @param hi
+     * @return
+     */
     private int binarySearchRecursive(int[] nums, int target, int lo, int hi){
         if(lo > hi)
             return -1;
 
-        int mid = (lo + hi) / 2;
+        int mid = lo + (hi - lo) / 2;
         if(target == nums[mid]){
             return mid;
         }
@@ -30,9 +39,19 @@ public class BinarySearch704 {
         }
     }
 
+    /**
+     * Time Complexity: O(log n)
+     * Space Complexity: O(1)
+     * @param nums
+     * @param target
+     * @param lo
+     * @param hi
+     * @return
+     */
     private int binarySearchIterative(int[] nums, int target, int lo, int hi){
         while(lo <= hi){
-            int mid = (lo + hi) / 2;
+//            int mid = (lo + hi) / 2;
+            int mid = lo + (hi - lo) / 2;
             if(target == nums[mid]){
                 return mid;
             }
