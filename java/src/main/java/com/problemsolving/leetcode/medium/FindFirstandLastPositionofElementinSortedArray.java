@@ -10,6 +10,14 @@ package com.problemsolving.leetcode.medium;
  * @since 27.02.2023
  */
 public class FindFirstandLastPositionofElementinSortedArray {
+
+    /**
+     * Time Complexity: O(n)
+     * Space Complexity: O(1), res array is of fixed size
+     * @param nums
+     * @param target
+     * @return
+     */
     public int[] searchRange1(int[] nums, int target) {
         int[] res = {-1, -1};
 
@@ -20,12 +28,21 @@ public class FindFirstandLastPositionofElementinSortedArray {
                 while(++i < nums.length && nums[i] == target){
                     res[1] = i;
                 }
+                break;
             }
         }
 
         return res;
     }
 
+    /**
+     * using binary search for the first and last
+     * Time Complexity: O(log n)
+     * Space Complexity: O(1), no extra data structure is introduced
+     * @param nums
+     * @param target
+     * @return
+     */
     public int[] searchRange2(int[] nums, int target) {
         int[] res = new int[2];
         res[0] = findFirst(nums, target);
