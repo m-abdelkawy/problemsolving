@@ -6,7 +6,7 @@ package com.problemsolving.leetcode.medium;
  *
  * @author Mohammed Abdelkawy
  * @version 1.0.0
- * @since 18.03.2023
+ * @since 2026.05.19
  */
 
 
@@ -40,7 +40,7 @@ public class SearchA2DMatrix2 {
 
     /**
      * Binary Search Algorithm
-     * Time Complexity: O(log(n!))
+     * Time Complexity: O(min(m, n) . (log m + log n))
      * Space Complexity: O(1)
      *
      * @param matrix input matrix
@@ -95,12 +95,69 @@ public class SearchA2DMatrix2 {
         return false;
     }
 
+    /*--------------------------------------Another Binary Search Implementation--------------------------------------*/
+
+    /**
+     * Time Complexity: O(min(m, n) . (log m + log n))
+     * Space Complexity: O(1)
+     * @param matrix
+     * @param target
+     * @return
+     */
+    public boolean searchMatrix4(int[][] matrix, int target) {
+        if(matrix == null || matrix.length == 0)
+            return false;
+
+        int m = matrix.length;
+        int n = matrix[0].length;
+
+        int smallerDim = Math.min(m, n);
+        for(int i = 0; i < smallerDim; i++){
+            boolean found = binarySearch2(matrix, i, target);
+
+            if(found) return true;
+        }
+        return false;
+    }
+
+    private boolean binarySearch2(int[][] matrix, int start, int target){
+        int m = matrix.length, n = matrix[0].length;
+
+        int lo = start;
+        int hi = n - 1;
+
+        // check hz
+        while(lo <= hi){
+            int mid = lo + (hi - lo) / 2;
+            if(target == matrix[start][mid]) return true;
+            else if(target < matrix[start][mid]){
+                hi = mid - 1;
+            } else{
+                lo = mid + 1;
+            }
+        }
+
+        lo = start;
+        hi = m - 1;
+        while (lo <= hi){
+            int mid = lo + (hi - lo)/2;
+            if(target == matrix[mid][start]) return true;
+            else if(target < matrix[mid][start]){
+                hi = mid - 1;
+            } else{
+                lo = mid + 1;
+            }
+        }
+        return false;
+    }
+
+
     /*--------------------------------------Divide and Conquer Algorithm--------------------------------------*/
 
     /**
      * Divide and Conquer Algorithm
-     * Time Complexity: O(log(n!))
-     * Space Complexity: O(1)
+     * Time Complexity: O(log n)
+     * Space Complexity: O(log n) because of the depth of recursion produces log n method calls in the call stack
      *
      * @param matrix input matrix
      * @param target search target
