@@ -10,6 +10,8 @@ import java.util.Set;
  * @author Mohammed Abdelkawy
  * @version 1.0.0
  * @since 2026.07.02
+ *
+ * @tags Union-Find, Graph, DFS, BFS
  */
 public class NumberOfProvinces {
     public int findCircleNum(int[][] isConnected) {
