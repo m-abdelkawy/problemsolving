@@ -143,4 +143,19 @@ public class ReorderList {
             list2 = next2;
         }
     }
+
+    private void mergeTwoLists(ListNode list1, ListNode list2){
+        while(list1 != null && list2 != null){
+            ListNode next1 = list1.next;
+            ListNode next2 = list2.next;
+
+            // change pointers
+            list1.next = list2;
+            list2.next = next1;
+
+            // shift list1 and list2 to nexts for the iteration to continue
+            list1 = next1;
+            list2 = next2;
+        }
+    }
 }
