@@ -16,9 +16,41 @@ import java.util.stream.Collectors;
  * @since 31.05.2022
  */
 public class ThreeSum {
+
+    /**
+     * Brute force solution
+     * O(N^3) time complexity
+     * sorting is constant since the list only contains 3 elements always, so O(3log3) = O(1)
+     * space complexity: O(m) , where m is the number of unique triplets found, at max m = n^2, so O(n^2)
+     * (N choose 2) = N! / (2! * (N-2)!) = N * (N-1) / 2 = O(N^2), since whe have a single value for the third element,
+     * we can find it in O(1) time, so the total number of unique triplets is O(N^2) at max
+     *
+     * @param nums
+     * @return
+     */
+    public List<List<Integer>> threeSum0(int[] nums) {
+        Set<List<Integer>> res = new HashSet<>();
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                for (int k = j + 1; k < nums.length; k++) {
+                    if (nums[i] + nums[j] + nums[k] == 0) {
+                        List<Integer> lst = new ArrayList<>();
+                        lst.add(nums[i]);
+                        lst.add(nums[j]);
+                        lst.add(nums[k]);
+                        Collections.sort(lst);
+                        res.add(lst);
+                    }
+                }
+            }
+        }
+        return new ArrayList<>(res);
+    }
+
     /**
      * Space Complexity: O(1) -> no extra DS, ignoring output list
      * Time Complexity: O(n^2) -> O(n log n) for soring + O(n^2) for outer loop plus 2 pointers
+     *
      * @param numbers
      * @param target
      * @return
@@ -60,6 +92,7 @@ public class ThreeSum {
     /**
      * Space Complexity: O(1) -> no extra DS, ignoring output list
      * Time Complexity: O(n^2) -> O(n log n) for soring + O(n^2) for outer loop plus 2 pointers
+     *
      * @param numbers
      * @param target
      * @return
@@ -69,7 +102,7 @@ public class ThreeSum {
         Arrays.sort(nums);
         int N = nums.length;
         for (int i = 0; i < N; i++) {
-            if(i > 0 && nums[i] == nums[i-1]) continue;
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
             int j = i + 1;
             int k = N - 1;
             while (j < k) {
@@ -118,9 +151,9 @@ public class ThreeSum {
         Set<Integer> seen = new HashSet<>();
         for (int i = firstIndex + 1; i < nums.length; i++) {
             int complement = -nums[firstIndex] - nums[i];
-            if(seen.contains(complement)){
+            if (seen.contains(complement)) {
                 lst.add(List.of(nums[firstIndex], nums[i], complement));
-                while (i + 1 < nums.length && nums[i+1] == nums[i]){
+                while (i + 1 < nums.length && nums[i + 1] == nums[i]) {
                     i++;
                 }
             }
@@ -133,6 +166,7 @@ public class ThreeSum {
     /**
      * Space Complexity: O(n) -> for introducing the seen hashset, that is created every outer iteration and holding n numbers at maximum [excluding the output list]
      * Time Complexity: O(n^2) -> for the outer loop x the inner hash scan
+     *
      * @param nums
      * @return
      */
@@ -141,21 +175,21 @@ public class ThreeSum {
         Arrays.sort(nums);
         List<List<Integer>> res = new ArrayList<>();
         for (int i = 0; i < N; i++) {
-            if(i > 0 && nums[i] == nums[i-1]) continue;
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
             twoSumHashSet2(nums, i, res);
         }
         return res;
     }
 
-    private void twoSumHashSet2(int[] nums, int firstIndex, List<List<Integer>> lst){
+    private void twoSumHashSet2(int[] nums, int firstIndex, List<List<Integer>> lst) {
         int N = nums.length;
         Set<Integer> seen = new HashSet<>();
         for (int i = firstIndex + 1; i < N; i++) {
             int first = nums[firstIndex];
-            int complement = 0-first-nums[i];
-            if(seen.contains(complement)){
+            int complement = 0 - first - nums[i];
+            if (seen.contains(complement)) {
                 lst.add(Arrays.asList(first, nums[i], complement));
-                while(i + 1 < N && nums[i+1] == nums[i]){
+                while (i + 1 < N && nums[i + 1] == nums[i]) {
                     i++;
                 }
             }
