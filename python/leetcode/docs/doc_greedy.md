@@ -11,4 +11,4 @@ steps:
 ### examples
 [455. Assign Cookies](../easy/455_assign_cookies.py)  
 [860. Lemonade Change](../easy/860_lemonade_change.py)  
-[452. Minimum Number of Arrows to Burst Balloons](../medium/452_min_arrows_burst_balloons.py)
+[452. Minimum Number of Arrows to Burst Balloons](../medium/452_minimum_number_of_arrows_to_burst_balloons.py)
