@@ -8,7 +8,7 @@ class Solution:
         left, right = 0, len(nums) - 1
         return self.binarySearchRecursive(nums, left, right, target)
     
-    def binarySearchIterative(self, nums: list[int], left: int, right: int, target: int):
+    def binarySearchIterative(self, nums: list[int], left: int, right: int, target: int) -> int:
         while left <= right:
             mid = left + (right - left) // 2
             if nums[mid] == target:
@@ -20,7 +20,7 @@ class Solution:
         return -1
 
     
-    def binarySearchRecursive(self, nums: list[int], left: int, right: int, target: int):
+    def binarySearchRecursive(self, nums: list[int], left: int, right: int, target: int) -> int:
         if left > right:
             return -1        
         mid = left + (right - left) // 2
@@ -41,7 +41,6 @@ def main() -> None:
     ]
 
     for nums, target, expected in test_cases:
-        assert solution.search(nums, target) == expected
         assert solution.search(nums, target) == expected
 
     print("All tests passed.")
