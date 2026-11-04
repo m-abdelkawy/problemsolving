@@ -6,12 +6,9 @@
 class Solution:
     def search(self, nums: list[int], target: int) -> int:
         left, right = 0, len(nums) - 1
-        return self.binarySearchIterative(nums, left, right, target)
+        return self.binarySearchRecursive(nums, left, right, target)
     
     def binarySearchIterative(self, nums: list[int], left: int, right: int, target: int):
-        left = 0
-        right = len(nums) - 1
-
         while left <= right:
             mid = left + (right - left) // 2
             if nums[mid] == target:
@@ -30,10 +27,9 @@ class Solution:
         if target == nums[mid]:
             return mid
         elif target < nums[mid]:
-            right = mid - 1
+            return self.binarySearchRecursive(nums, left, mid - 1, target)
         else:
-            left = mid + 1 
-        return self.binarySearchRecursive(nums, left, right, target)
+            return self.binarySearchRecursive(nums, mid + 1, right, target)
     
     
 def main() -> None:
